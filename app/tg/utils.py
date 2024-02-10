@@ -67,7 +67,8 @@ def get_resolution( t):
 
 
 async def is_allowed_grp(ev)->bool:
-    return bool(ev.is_group and await crud.is_channel_allowed( ev.chat.id))
+    return bool(ev.is_group and ev.chat is not None and await crud.is_channel_allowed(ev.chat.id))
+
 
 def convert_size(s:int ,):
     s,e = round(s/(1024*1024),1),' MB'
