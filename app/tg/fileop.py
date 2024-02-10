@@ -67,8 +67,10 @@ async def new_movie(event):
         return
         
     try:
-        d = await utils.process_msg_body( event.message.message)
+        d = await utils.process_msg_body(event.message.message)
     except Exception as e:
+        print(f'Error processing message body: {e}')
+        print(f'Message content: {event.message.message}')
         await event.reply( 'Invalid format')
         raise events.StopPropagation
 
