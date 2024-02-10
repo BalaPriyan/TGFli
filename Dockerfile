@@ -16,7 +16,7 @@ RUN /app/venv/bin/activate
 RUN pip3 install -r /app/requirements.txt
 
 # Set environment variables
-ENV DATABASE_URL=<your_database_url>
+ENV DATABASE_URL=postgres://koyeb-adm:ftqdyolX9Tg0@ep-quiet-resonance-a2yei523.eu-central-1.pg.koyeb.app/koyebdb
 
 # Setup Database
 RUN psql $DATABASE_URL < /app/scripts/migrate.sh
