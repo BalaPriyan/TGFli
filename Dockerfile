@@ -2,15 +2,22 @@
 FROM python:3.8-slim
 
 # Set the working directory in the container
+RUN apt-get -qq update \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /app
 WORKDIR /app
+COPY . .
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Create a virtual environment and activate it
-RUN pip3 install virtualenv
-RUN virtualenv venv
-RUN /app/venv/bin/activate
+RUN python3 -m pip install --upgrade \
+    pip \
+    wheel
+
 
 # Install dependencies
 RUN pip3 install -r /app/requirements.txt
