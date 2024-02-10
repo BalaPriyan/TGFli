@@ -22,6 +22,8 @@ RUN python3 -m pip install --upgrade \
 # Install dependencies
 RUN pip3 install -r /app/requirements.txt
 
+RUN apt-get update && apt-get install -y postgresql-client
+
 # Set environment variables
 ENV DATABASE_URL=postgres://koyeb-adm:ftqdyolX9Tg0@ep-quiet-resonance-a2yei523.eu-central-1.pg.koyeb.app/koyebdb
 
