@@ -14,8 +14,10 @@ AllEv = Union[events.ChatAction,events.NewMessage,events.CallbackQuery]
 @client.on(events.NewMessage)
 async def dn_ensure_its_allowed_grp(ev):
     print('New message')
-    if not await is_allowed_grp( ev):
-        raise events.StopPropagation
+    if ev.chat is not None and ev.is_group:
+        if not await is_allowed_grp(ev):
+            raise events.StopPropagation
+
 
 @client.on(events.CallbackQuery)
 async def cb_ensure_its_allowed_grp(ev):
